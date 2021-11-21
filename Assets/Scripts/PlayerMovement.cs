@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+  public ParticleSystem dust;
     public ProjectileBehavior projectileBehavior;
     public Transform LanchOffset;
     private Rigidbody2D rb;
@@ -28,12 +29,12 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         inputX = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(inputX * MovementSpeed, rb.velocity.y);
-
+        //rb.velocity = new Vector2(inputX * MovementSpeed, rb.velocity.y);
         if (Input.GetAxisRaw("Vertical") > .1f && Mathf.Abs(rb.velocity.y) < 0.001f)
         {
-            //rb.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
-            rb.velocity = new Vector2(rb.velocity.x, JumpForce);
+          CreateDust();
+          rb.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
+            //rb.velocity = new Vector2(rb.velocity.x, JumpForce);
         }
 
         UpdateAniamtionMovement();
@@ -49,9 +50,9 @@ public class PlayerMovement : MonoBehaviour
             Instantiate(projectileBehavior, LanchOffset.position, transform.rotation);
         }
     }
-    // void FixedUpdate() {
-    //   transform.position += new Vector3(inputX,0,0) * Time.deltaTime * MovementSpeed;
-    // }
+    void FixedUpdate() {
+      transform.position += new Vector3(inputX,0,0) * Time.deltaTime * MovementSpeed;
+    }
     void UpdateAniamtionMovement()
     {
         MoveState state;
@@ -82,5 +83,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         anim.SetInteger("State", (int)state);
+    }
+    void CreateDust()
+    {
+      dust.Play();
     }
 }

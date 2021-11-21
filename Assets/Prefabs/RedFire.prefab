@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 6909518985310218135}
   - component: {fileID: 4156871130392165724}
   m_Layer: 0
-  m_Name: Projectiles
+  m_Name: RedFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
