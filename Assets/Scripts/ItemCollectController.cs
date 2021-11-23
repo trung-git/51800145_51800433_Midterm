@@ -10,6 +10,7 @@ public class ItemCollectController : MonoBehaviour
     [SerializeField]
     private Text txtScore;
     private int countItems = 0;
+    public GameObject explosion;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Items"))
@@ -17,6 +18,7 @@ public class ItemCollectController : MonoBehaviour
             Destroy(other.gameObject);
             countItems++;
             txtScore.text = "Score: " + countItems;
+            Instantiate(explosion, other.gameObject.transform.position, other.gameObject.transform.rotation);
         }
     }
 }
