@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+
+  [SerializeField]
+  private bool isDie = false;
   public ParticleSystem dust;
     public ProjectileBehavior projectileBehavior;
     public Transform LanchOffset;
@@ -28,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+      if(!isDie)
+      {
         inputX = Input.GetAxisRaw("Horizontal");
         //rb.velocity = new Vector2(inputX * MovementSpeed, rb.velocity.y);
         if (Input.GetAxisRaw("Vertical") > .1f && Mathf.Abs(rb.velocity.y) < 0.001f)
@@ -49,9 +54,14 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Hit");
             Instantiate(projectileBehavior, LanchOffset.position, transform.rotation);
         }
+      }
     }
     void FixedUpdate() {
+      if (!isDie)
+      {
       transform.position += new Vector3(inputX,0,0) * Time.deltaTime * MovementSpeed;
+
+      }
     }
     void UpdateAniamtionMovement()
     {
@@ -87,5 +97,9 @@ public class PlayerMovement : MonoBehaviour
     void CreateDust()
     {
       dust.Play();
+    }
+    public void SetDie()
+    {
+      isDie = true;
     }
 }
