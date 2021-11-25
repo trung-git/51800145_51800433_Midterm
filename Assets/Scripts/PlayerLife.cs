@@ -18,6 +18,10 @@ public class PlayerLife : MonoBehaviour
     {
       Die();
     }
+    if (other.gameObject.CompareTag("CheckPoint"))
+    {
+      Win();
+    }
   }
   void Die()
   {
@@ -28,5 +32,16 @@ public class PlayerLife : MonoBehaviour
   void restartLevel()
   {
     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+  }
+  void Win()
+  {
+    GameObject.FindGameObjectWithTag("CheckPoint").GetComponent<Animator>().SetTrigger("CheckWin");
+    anim.SetTrigger("Win");
+    rb.bodyType = RigidbodyType2D.Static;
+    gameObject.GetComponent<PlayerMovement>().SetDie();
+  }
+  void nextLevel()
+  {
+    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
   }
 }

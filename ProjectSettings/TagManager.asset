@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Items
   - Trap
+  - CheckPoint
   layers:
   - Default
   - TransparentFX
@@ -42,6 +43,9 @@ TagManager:
   m_SortingLayers:
   - name: Background
     uniqueID: 2358364221
+    locked: 0
+  - name: Middle
+    uniqueID: 1389113779
     locked: 0
   - name: Default
     uniqueID: 0
