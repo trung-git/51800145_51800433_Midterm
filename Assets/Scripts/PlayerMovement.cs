@@ -102,4 +102,8 @@ public class PlayerMovement : MonoBehaviour
     {
       isDie = true;
     }
+    public bool isDead()
+    {
+      return isDie;
+    }
 }

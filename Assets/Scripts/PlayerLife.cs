@@ -23,7 +23,7 @@ public class PlayerLife : MonoBehaviour
       Win();
     }
   }
-  void Die()
+  public void Die()
   {
     anim.SetTrigger("Die");
     rb.bodyType = RigidbodyType2D.Static;
