@@ -31,8 +31,6 @@ public class EnemyMove : MonoBehaviour
       transform.rotation = currentPoint == 0 ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
     }
     transform.position = Vector3.MoveTowards(transform.position, points[currentPoint].transform.position,Time.deltaTime * speed);
-      
-
     }
     
   }

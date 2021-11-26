@@ -5,6 +5,7 @@ using UnityEngine;
 public class ProjectileBehavior : MonoBehaviour
 {
     public float speed = 4.5f;
+    [SerializeField] private AudioClip EnemyDie;
     // Update is called once per frame
     void Update()
     {
@@ -12,5 +13,10 @@ public class ProjectileBehavior : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other) {
       Destroy(gameObject);
+      if (other.gameObject.name == "Enemy")
+      {
+        SoundManager.instance.PlaySound(EnemyDie);
+        other.gameObject.GetComponent<Animator>().SetTrigger("Die");
+      }
     }
 }
