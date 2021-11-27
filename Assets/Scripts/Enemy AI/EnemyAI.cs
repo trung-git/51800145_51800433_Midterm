@@ -28,7 +28,7 @@ public class EnemyAI : MonoBehaviour
         //Attack only when player in sight?
         if (PlayerInSight())
         {
-          if (!GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().isDead())
+          if (!GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().isDead())
           {
 
             if (cooldownTimer >= attackCooldown)
@@ -68,7 +68,7 @@ public class EnemyAI : MonoBehaviour
     }
     private void DamagePlayer()
     {
-      if (!GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().isDead())
+      if (!GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().isDead())
       {
       Debug.Log("DAMAGE");  
       GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLife>().Die();

@@ -11,7 +11,7 @@ public class ItemCollectController : MonoBehaviour
   [SerializeField]
   public Text txtScore;
 
-  private int countItems = 0;
+  public int countItems = 0;
   public GameObject explosion;
   private void OnTriggerEnter2D(Collider2D other)
   {
@@ -21,7 +21,7 @@ public class ItemCollectController : MonoBehaviour
       countItems++;
       txtScore.text = "Score: " + countItems;
       Instantiate(explosion, other.gameObject.transform.position, other.gameObject.transform.rotation);
-      GetComponent<PlayerMovement>().HitCount++;
+      GetComponent<PlayerController>().HitCount++;
       SoundManager.instance.PlaySound(score);
     }
   }
