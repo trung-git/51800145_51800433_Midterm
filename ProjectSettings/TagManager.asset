@@ -8,6 +8,8 @@ TagManager:
   - Trap
   - CheckPoint
   - Enemy
+  - txtMusic
+  - txtVolume
   layers:
   - Default
   - TransparentFX
