@@ -273,6 +273,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 659772387}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: LoadDataSetting
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &125201569
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,6 +378,18 @@ MonoBehaviour:
       - m_Target: {fileID: 659772387}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
         m_MethodName: textUpdateVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 659772387}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: updateVolume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -700,6 +724,7 @@ GameObject:
   - component: {fileID: 659772383}
   - component: {fileID: 659772387}
   - component: {fileID: 659772388}
+  - component: {fileID: 659772389}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -806,6 +831,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TxtRangeMusic: {fileID: 1207598130}
   TxtRangeVolume: {fileID: 1988433866}
+  backgroundAudio: {fileID: 2067708408}
 --- !u!114 &659772388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -818,6 +844,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35d777eee04a9394f8b9ae8a51d35f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &659772389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659772382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8248b98448947c4389d6680b9d6476a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutTexture: {fileID: 2800000, guid: 6f7b6d7de49c9c444974964782b847e0, type: 3}
+  fadeSpeed: 0.8
 --- !u!1 &663233032
 GameObject:
   m_ObjectHideFlags: 0
@@ -1648,7 +1688,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 867724401}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 659772387}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: SaveDataSetting
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &867724401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3373,6 +3425,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 659772387}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: updateMusic
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2035195767
 GameObject:
   m_ObjectHideFlags: 0
@@ -3475,7 +3539,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: bb6cbdb121eed2f4bb8124a1aa027082, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8ddebbac9d752d84d904e380a1a3934e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

@@ -12,9 +12,9 @@ using UnityEngine;
 }
 [System.Serializable]public class SettingData
 {
-  public int music {get; set;}
-  public int volume {get; set;}
-  public SettingData(int music, int volume)
+  public float music {get; set;}
+  public float volume {get; set;}
+  public SettingData(float music, float volume)
   {
     this.music = music;
     this.volume = volume;

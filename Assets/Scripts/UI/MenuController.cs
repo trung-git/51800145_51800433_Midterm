@@ -7,64 +7,76 @@ using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
-    [SerializeField] private Text TxtRangeMusic = null;
-    [SerializeField] private Text TxtRangeVolume = null;
-    //[SerializeField] private AudioSource backgroundAudio;
-    private SettingData settingData;
+  [SerializeField] private Text TxtRangeMusic = null;
+  [SerializeField] private Text TxtRangeVolume = null;
+  [SerializeField] private AudioSource backgroundAudio;
+  private SettingData settingData;
 
-    //[SerializeField]private Slider slider;
-    private void Awake() {
-      if (File.Exists(Application.persistentDataPath + "/Settingdata.fun"))    
-      { 
-        settingData = SaveSystem.LoadSetting();
-        
-      }
-      else
-      {
-        settingData = new SettingData(128,128);
-      }
+  private GameObject sliderMusic;
+  private GameObject sliderVolume;
+  private void Awake() {
+    Debug.Log("File data: \n"+Application.persistentDataPath);
+    //Khi moi Awake thi load data Setting vao settingData
+    if (File.Exists(Application.persistentDataPath + "/Settingdata.fun"))    
+    {//Khi co du lieu settingData tu truoc thi load
+      settingData = SaveSystem.LoadSetting();
     }
-    // private void Start() {
-    //   backgroundAudio.priority = settingData.music;
-    //   slider.value = backgroundAudio.volume;
-    // }
-    public void PlayGame()
+    else//Khong co settingData thi mac dinh sound la 75%
     {
-        SceneManager.LoadScene("Level1");
-        if (File.Exists(Application.persistentDataPath + "/Playerdata.fun"))    
-        {    
-          // If file found, delete it    
-          File.Delete(Application.persistentDataPath + "/Playerdata.fun");      
-        }    
+      settingData = new SettingData(.75f,.75f);
     }
+    //Cap nhap sound Background voi settingData
+    backgroundAudio.volume = settingData.music;
+  }
+  public void PlayGame()
+  {
+    //Load Level1
+    SceneManager.LoadScene("Level1");
+    //Kiem tra neu co du lieu thi xoa
+    if (File.Exists(Application.persistentDataPath + "/Playerdata.fun"))    
+    {    
+      // Xoa du lieu cu 
+      File.Delete(Application.persistentDataPath + "/Playerdata.fun");      
+    }    
+  }
 
-    public void QuitGame()
-    {
-        Debug.Log("Exit!!");
-        Application.Quit();
-    }
-    
-    public void textUpdateMusic(float value)
-    {
-      TxtRangeMusic = GameObject.FindGameObjectWithTag("txtMusic").GetComponent<Text>();
-      TxtRangeMusic.text = Mathf.RoundToInt(value * 100) + " %";
-      //Doc flie 
+  public void QuitGame()
+  {
+    Debug.Log("Exit!!");
+    Application.Quit();
+  }
+  
+  public void textUpdateMusic(float value)
+  {
+    TxtRangeMusic = GameObject.FindGameObjectWithTag("txtMusic").GetComponent<Text>();
+    TxtRangeMusic.text = Mathf.RoundToInt(value * 100) + " %";
+  }
+  public void textUpdateVolume(float value)
+  {
+    TxtRangeVolume = GameObject.FindGameObjectWithTag("txtVolume").GetComponent<Text>();
+    TxtRangeVolume.text = Mathf.RoundToInt(value * 100) + " %";
+  }
 
-      //Gan gia tri moi 
+  public void updateMusic(float value)
+  {
+    backgroundAudio.volume = value;
+    settingData.music = value;
+  }
+  public void updateVolume(float value)
+  {
+    settingData.volume = value;
+  }
+  public void LoadDataSetting(){
+    sliderMusic = GameObject.Find("SliderMusic");
+    sliderMusic.GetComponent<Slider>().value = settingData.music;
 
-      //Save
-    }
-    public void textUpdateVolume(float value)
-    {
-      TxtRangeVolume = GameObject.FindGameObjectWithTag("txtVolume").GetComponent<Text>();
-      TxtRangeVolume.text = Mathf.RoundToInt(value * 100) + " %";
-    }
+    sliderVolume = GameObject.Find("SliderVolume");
+    sliderVolume.GetComponent<Slider>().value = settingData.volume;
+  }
 
-    // public void updateMusic(float value)
-    // {
-    //   Debug.Log((int)(value * 256));
-    //   backgroundAudio.volume = value;
-    // }
-    
+  public void SaveDataSetting()
+  {
+    SaveSystem.SaveSetting(settingData);
+  }
 
 }
