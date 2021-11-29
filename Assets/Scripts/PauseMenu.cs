@@ -5,9 +5,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
-    public static bool GamePaused = false;
+    public static bool GamePaused ;
     public GameObject pauseMenu;
-
+    private void Awake() {
+      GamePaused = false;
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -38,10 +40,12 @@ public class PauseMenu : MonoBehaviour
     }
     public void QuitGame()
     {
-        SceneManager.LoadScene("Start");
+      Time.timeScale = 1f;
+      SceneManager.LoadScene("Start");
     }
     public void RestGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+      Time.timeScale = 1f;      
+      SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

@@ -1,7 +1,6 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-using UnityEditor.SceneManagement;
 public static class SaveSystem 
 {
   public static void SaveData(Scene scene)
