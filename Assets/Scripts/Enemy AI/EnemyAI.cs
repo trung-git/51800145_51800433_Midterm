@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 public class EnemyAI : MonoBehaviour
 {
     [SerializeField] private AudioClip Attack;
-    
-
 
     [SerializeField] private float attackCooldown;
     [SerializeField] private BoxCollider2D boxCollider;
@@ -17,9 +15,10 @@ public class EnemyAI : MonoBehaviour
     private Rigidbody2D rb;
 
     private Animator anim;
-    private void Start() {
-      anim = GetComponent<Animator>();
-      rb = GetComponent<Rigidbody2D>();
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
     private void Update()
     {
@@ -28,57 +27,54 @@ public class EnemyAI : MonoBehaviour
         //Attack only when player in sight?
         if (PlayerInSight())
         {
-          if (!GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().isDead())
-          {
-
-            if (cooldownTimer >= attackCooldown)
+            if (!GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().isDead())
             {
-              cooldownTimer = 0;
-              anim.SetBool("Moving",false);
-              anim.SetTrigger("Attack1");
-              SoundManager.instance.PlaySound(Attack);
-            } 
-          }
+
+                if (cooldownTimer >= attackCooldown)
+                {
+                    cooldownTimer = 0;
+                    anim.SetBool("Moving", false);
+                    anim.SetTrigger("Attack1");
+                    SoundManager.instance.PlaySound(Attack);
+                }
+            }
         }
         // else
         // {
-          
+
         //   anim.SetBool("Moving",true);
         // }
 
-        
+
     }
 
     private bool PlayerInSight()
     {
-      RaycastHit2D hit = 
-          Physics2D.BoxCast(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderDistance,
-          new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z),
-          0, Vector2.left, 0, playerLayer);
-
-      
-
-      return hit.collider != null;
+        RaycastHit2D hit =
+            Physics2D.BoxCast(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderDistance,
+            new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z),
+            0, Vector2.left, 0, playerLayer);
+        return hit.collider != null;
     }
     private void OnDrawGizmos()
     {
-      Gizmos.color = Color.red;
-      Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderDistance,
-          new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z));
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right * range * transform.localScale.x * colliderDistance,
+            new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z));
     }
     private void DamagePlayer()
     {
-      if (!GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().isDead())
-      {
-      Debug.Log("DAMAGE");  
-      GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLife>().Die();
-      }
+        if (!GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().isDead())
+        {
+            Debug.Log("DAMAGE");
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLife>().Die();
+        }
     }
 
     private void Dead()
     {
-      anim.SetBool("Moving",false);
-      Destroy(transform.parent.gameObject);
-      
+        anim.SetBool("Moving", false);
+        Destroy(transform.parent.gameObject);
+
     }
 }
